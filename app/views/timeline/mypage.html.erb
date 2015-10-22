@@ -1,0 +1,40 @@
+<h1>My page</h1>
+
+<ul>
+    <% @myblogs.each do |b| %>
+    <li><%=b.user.email%> : 
+    <div class='well'>
+        <%=b.content%>
+    </div>
+        <%=form_tag '/correct', method: 'post' do %>
+        <input type='hidden' name='id' value='<%=b.id%>'>
+
+        <div class= 'form-group'>
+            <textarea name="naeyong" class='form-control' placeholder="수정할 내용 입력" row="1"></textarea>
+        </div>
+        <div class= 'form-group'>
+            <input type="submit" class='btn btn-success' value='수정'>
+            <a class="btn btn-warning" href='/destroy?id=<%=b.id%>'>삭제</a><br>
+
+        </div>
+        <% end %>
+
+        <ol>
+        <% b.comments.each do |c| %>
+            <li><%=c.user.email%> : <%=c.msg%></li>
+            <%=form_tag '/c_correct', method: 'post' do %>
+            <input type='hidden' name='id' value='<%=c.id%>'>
+                <% if current_user.email==c.user.email%>
+                <div class= 'form-group'>
+                    <input type=text name="comment" placeholder="수정할 내용 입력">
+                    <input type="submit" class='btn btn-default btn-sm' value='수정'>
+                    <a class="btn btn-default btn-sm" href='/c_destroy?id=<%=c.id%>'>삭제</a><br>
+                </div>
+                <% end %>
+            <% end %>
+
+        <% end %>
+        </ol>
+    </li>
+    <% end %>
+</ul>

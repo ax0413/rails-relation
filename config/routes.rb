@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   root 'timeline#index'
   post '/write' => 'timeline#write'
   post '/comment' => 'timeline#comment'
+  get '/mypage' => 'timeline#mypage'
+  get '/destroy' => 'timeline#destroy'
+  post '/correct' => 'timeline#correct'
+  get '/c_destroy' => 'timeline#c_destroy'
+  post '/c_correct' => 'timeline#c_correct'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
